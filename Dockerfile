@@ -14,8 +14,6 @@ RUN apt-get -y update && apt-get -y install apt-transport-https ca-certificates 
 
 COPY files-config/000-default.conf files-config/apache2.conf files-config/start.sh /root/
 
-RUN chmod +x /root/start.sh
-
 #---------------------------------------------------------------------------
 
 # APACHE Stage
@@ -56,6 +54,7 @@ WORKDIR /var/www/html
 COPY --from=base /root/start.sh /usr/local/bin/start.sh
 
 RUN apt-get -y install mariadb-client dos2unix && \
-    dos2unix /usr/local/bin/start.sh
+    dos2unix /usr/local/bin/start.sh && \
+    chmod +x /usr/local/bin/start.sh
 
 CMD ["/usr/local/bin/start.sh"]
