@@ -54,6 +54,7 @@ WORKDIR /var/www/html
 COPY --from=base /root/start.sh /usr/local/bin/start.sh
 
 RUN apt-get -y install mariadb-client dos2unix && \
-    dos2unix /usr/local/bin/start.sh
+    dos2unix /usr/local/bin/start.sh && \
+    chmod +x /usr/local/bin/start.sh
 
 CMD ["/usr/local/bin/start.sh"]
